@@ -1,4 +1,4 @@
-h<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" style="color-scheme: dark;">
 <head>
     <meta charset="UTF-8">
@@ -14,24 +14,25 @@ h<!DOCTYPE html>
         body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
         body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px); background-size: 64px 64px; z-index: 0; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
-        header { padding: 48px 0 24px; text-align: center; }
-        .badge { display: inline-block; background: #3b82f6; color: white; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 24px; }
-        h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 16px; text-wrap: balance; }
+        header { padding: 80px 0 64px; text-align: center; position: relative; }
+        header::before { content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 640px; height: 640px; background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, rgba(251,191,36,0.04) 40%, transparent 70%); pointer-events: none; z-index: -1; }
+        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(59,130,246,0.12); color: #93c5fd; padding: 8px 20px; border-radius: 24px; font-size: 13px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 32px; border: 1px solid rgba(59,130,246,0.2); backdrop-filter: blur(8px); }
+        h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px; text-wrap: balance; letter-spacing: -0.02em; }
         h2 { text-wrap: balance; }
         h1 span { color: #fbbf24; }
-        .subtitle { font-size: 1.15rem; color: #94a3b8; max-width: 700px; margin: 0 auto 32px; line-height: 1.6; }
-        .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease; border: none; cursor: pointer; }
+        .subtitle { font-size: 1.15rem; color: #94a3b8; max-width: 600px; margin: 0 auto 48px; line-height: 1.7; }
+        .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 56px; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; border-radius: 12px; font-size: 1.05rem; font-weight: 700; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease; border: none; cursor: pointer; }
         .btn:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
-        .btn-primary { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; box-shadow: 0 4px 20px rgba(251,191,36,0.3); }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(251,191,36,0.4); }
-        .btn-secondary { background: #1e293b; color: #e2e8f0; border: 2px solid #334155; }
-        .btn-secondary:hover { border-color: #3b82f6; background: #1e3a5f; }
+        .btn-primary { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; box-shadow: 0 4px 24px rgba(251,191,36,0.25); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(251,191,36,0.4); }
+        .btn-secondary { background: rgba(30,41,59,0.8); color: #e2e8f0; border: 1px solid #334155; backdrop-filter: blur(8px); }
+        .btn-secondary:hover { border-color: #3b82f6; background: rgba(30,58,95,0.8); }
         .btn svg { width: 24px; height: 24px; }
-        .stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 48px; flex-wrap: wrap; }
-        .stat { text-align: center; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 640px; margin: 0 auto 64px; }
+        .stat { background: rgba(30,41,59,0.6); border: 1px solid #1e293b; border-radius: 16px; padding: 24px 16px; backdrop-filter: blur(8px); }
         .stat-value { font-size: 2rem; font-weight: 800; color: #fbbf24; font-variant-numeric: tabular-nums; }
-        .stat-label { font-size: 0.85rem; color: #64748b; margin-top: 8px; }
+        .stat-label { font-size: 0.8rem; color: #64748b; margin-top: 8px; letter-spacing: 0.3px; }
         .video-section { margin-bottom: 64px; }
         .video-wrapper { background: #1e293b; border-radius: 16px; overflow: hidden; border: 1px solid #334155; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
         .video-wrapper video { width: 100%; display: block; }
@@ -63,7 +64,7 @@ h<!DOCTYPE html>
         footer a { color: #3b82f6; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
         a:focus-visible, button:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
-        @media (max-width: 640px) { .stats { gap: 24px; } .cta-group { flex-direction: column; align-items: center; } .math-section { padding: 24px; } }
+        @media (max-width: 640px) { header { padding: 56px 0 48px; } header::before { width: 320px; height: 320px; } .stats { grid-template-columns: repeat(2, 1fr); } .cta-group { flex-direction: column; align-items: center; } .math-section { padding: 24px; } }
     </style>
 </head>
 <body>
@@ -83,13 +84,13 @@ h<!DOCTYPE html>
                 Ver Video
             </a>
         </div>
+    </header>
         <div class="stats">
             <div class="stat"><div class="stat-value">5</div><div class="stat-label">Alternativas reales</div></div>
             <div class="stat"><div class="stat-value">2</div><div class="stat-label">APIs en vivo</div></div>
             <div class="stat"><div class="stat-value">6</div><div class="stat-label">Temas matem&aacute;ticos</div></div>
             <div class="stat"><div class="stat-value">100%</div><div class="stat-label">Gratuito</div></div>
         </div>
-    </header>
     <main id="main-content">
     <section class="video-section" id="video">
         <div class="video-wrapper">
