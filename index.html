@@ -1,21 +1,28 @@
 h<!DOCTYPE html>
-<html lang="es">
+<html lang="es" style="color-scheme: dark;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="preconnect" href="https://i.ytimg.com">
     <title>Simulador de Inversiones Colombia | Equipo C</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
         body::before { content: ''; position: fixed; inset: 0; background-image: linear-gradient(rgba(59,130,246,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.03) 1px, transparent 1px); background-size: 60px 60px; z-index: 0; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
         header { padding: 40px 0 20px; text-align: center; }
         .badge { display: inline-block; background: #3b82f6; color: white; padding: 6px 18px; border-radius: 20px; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 20px; }
-        h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
+        h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 12px; text-wrap: balance; }
+        h2 { text-wrap: balance; }
         h1 span { color: #fbbf24; }h
         .subtitle { font-size: 1.15rem; color: #94a3b8; max-width: 700px; margin: 0 auto 30px; line-height: 1.6; }
         .cta-group { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
-        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: all 0.3s ease; border: none; cursor: pointer; }
+        .btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 32px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease; border: none; cursor: pointer; }
+        .btn:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
         .btn-primary { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; box-shadow: 0 4px 20px rgba(251,191,36,0.3); }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(251,191,36,0.4); }
         .btn-secondary { background: #1e293b; color: #e2e8f0; border: 2px solid #334155; }
@@ -23,13 +30,15 @@ h<!DOCTYPE html>
         .btn svg { width: 22px; height: 22px; }
         .stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 50px; flex-wrap: wrap; }
         .stat { text-align: center; }
-        .stat-value { font-size: 2rem; font-weight: 800; color: #fbbf24; }
+        .stat-value { font-size: 2rem; font-weight: 800; color: #fbbf24; font-variant-numeric: tabular-nums; }
         .stat-label { font-size: 0.85rem; color: #64748b; margin-top: 4px; }
         .video-section { margin-bottom: 60px; }
         .video-wrapper { background: #1e293b; border-radius: 16px; overflow: hidden; border: 1px solid #334155; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
         .video-wrapper video { width: 100%; display: block; }
         .video-placeholder { width: 100%; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1e293b, #0f172a); color: #64748b; font-size: 1.2rem; }
         .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 60px; }
+        .skip-link { position: absolute; top: -100%; left: 16px; background: #fbbf24; color: #0f172a; padding: 8px 16px; border-radius: 8px; font-weight: 700; z-index: 100; text-decoration: none; }
+        .skip-link:focus { top: 16px; }
         .feature-card { background: #1e293b; border-radius: 16px; padding: 28px; border: 1px solid #334155; transition: border-color 0.3s; }
         .feature-card:hover { border-color: #3b82f6; }
         .feature-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 16px; }
@@ -53,22 +62,24 @@ h<!DOCTYPE html>
         footer { text-align: center; padding: 40px 0; border-top: 1px solid #1e293b; color: #475569; font-size: 0.9rem; }
         footer a { color: #3b82f6; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
+        a:focus-visible, button:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
         @media (max-width: 640px) { .stats { gap: 24px; } .cta-group { flex-direction: column; align-items: center; } .math-section { padding: 24px; } }
     </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Saltar al contenido</a>
 <div class="container">
-    <header>
+    <header role="banner">
         <div class="badge">UNIVERSIDAD COMPENSAR &mdash; MATEMATICA FUNDAMENTAL</div>
         <h1>Simulador de<br><span>Inversiones Colombia</span></h1>
         <p class="subtitle">Herramienta interactiva en Excel que compara 5 alternativas de inversi&oacute;n reales del mercado colombiano, con datos en vivo de la Superintendencia Financiera. Abierta y gratuita para toda la comunidad.</p>
         <div class="cta-group">
             <a href="simulador_inversiones_colombia_v2.xlsx" download class="btn btn-primary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                 Descargar Simulador (.xlsx)
             </a>
             <a href="#video" class="btn btn-secondary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 Ver Video
             </a>
         </div>
@@ -79,6 +90,7 @@ h<!DOCTYPE html>
             <div class="stat"><div class="stat-value">100%</div><div class="stat-label">Gratuito</div></div>
         </div>
     </header>
+    <main id="main-content">
     <section class="video-section" id="video">
         <div class="video-wrapper">
             <iframe width="100%" style="aspect-ratio:16/9;" src="https://www.youtube.com/embed/fUb-whw_2d0" title="Simulador de Inversiones Colombia" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -110,9 +122,10 @@ h<!DOCTYPE html>
             <div class="member"><div class="member-avatar" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">W</div><h4>Wilson</h4><p>Matem&aacute;tica Fundamental</p></div>
         </div>
     </section>
+    </main>
     <footer>
         <p>Simulador de Inversiones Colombia &mdash; Equipo C &mdash; Universidad Compensar &mdash; Marzo 2026</p>
-        <p style="margin-top: 8px;"><a href="https://github.com/wilson-romero" target="_blank">GitHub</a> &bull; Hecho con Excel + APIs de datos.gov.co</p>
+        <p style="margin-top: 8px;"><a href="https://github.com/wilson-romero" target="_blank" rel="noopener noreferrer">GitHub</a> &bull; Hecho con Excel + APIs de datos.gov.co</p>
     </footer>
 </div>
 </body>
